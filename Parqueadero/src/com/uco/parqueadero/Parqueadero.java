@@ -19,33 +19,27 @@ public class Parqueadero {
 	
 
 	public void registrar(Carro carro) {
-		if (cuposDisponibles())
-		{
-			for (int i=0;i<cantidadParqueaderos;i++) 
-			{ 
-				if (puestos[i].isDisponible()) 
-				{
-					puestos[i].setOcupante(carro.getPlaca());
-					carro.setPuesto(i+1);
-					carro.setHoraEntrada(horaActual);
-					puestos[i].setDisponible(false);
-					break;
-					
-				}
-			}
-		} 
+		if (cuposDisponibles()>0)
+		{ 
+		  int puestoDisponible = cuposDisponibles();	 
+		  puestos[puestoDisponible-1].setOcupante(carro.getPlaca());
+          carro.setPuesto(puestoDisponible);
+		  carro.setHoraEntrada(horaActual);
+		  puestos[puestoDisponible-1].setDisponible(false);
+		}		 
 	}
 	
-	public boolean cuposDisponibles() {
-		boolean hayCupo = false;
+	public int cuposDisponibles() {
+		int puestoDisponible = 0;
 		for( int i = 0 ; i < this.cantidadParqueaderos ; i++ ) 
 		{
 			if (puestos[i].isDisponible()) 
 			{
-				hayCupo = true;
+				puestoDisponible = i+1;
+				break;
 			}
 		}
-		return hayCupo;
+		return puestoDisponible;
 	}
 	
 	public double retirarCarro(Carro carro) {
