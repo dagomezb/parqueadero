@@ -5,50 +5,59 @@ public class Parqueadero {
 	private double dineroCaja;
 	private int cantidadParqueaderos;
 	private Puesto[] puestos;
+	private int horaActual;
 	
 	public Parqueadero(double tarifa, double dineroCaja, int cantidadParqueaderos) {
 		this.tarifa = tarifa;
 		this.dineroCaja = dineroCaja;
-		this.puestos = new Puesto[cantidadParqueaderos];
+		this.cantidadParqueaderos = cantidadParqueaderos;
+		puestos = new Puesto[cantidadParqueaderos];
+		for( int i = 0; i < cantidadParqueaderos; i++ )
+            puestos[ i ] = new Puesto();
+		this.horaActual = 07;
 	}
 	
 
-	public int registrar(Carro carro) {
-		int puestoAsignado = 0;
-		if (cuposDisponibles()) {
-			for (int i=0;i<cantidadParqueaderos;i++) {
-				if (puestos[i].isDisponible()) {
-					puestos[i].setDisponible(false);
+	public void registrar(Carro carro) {
+		if (cuposDisponibles())
+		{
+			for (int i=0;i<cantidadParqueaderos;i++) 
+			{ 
+				if (puestos[i].isDisponible()) 
+				{
 					puestos[i].setOcupante(carro.getPlaca());
 					carro.setPuesto(i+1);
-					puestoAsignado = i+1;
+					carro.setHoraEntrada(horaActual);
+					puestos[i].setDisponible(false);
+					break;
+					
 				}
-				}
-			} 
-		return puestoAsignado;
+			}
+		} 
 	}
 	
 	public boolean cuposDisponibles() {
-		for (int i=0;i<cantidadParqueaderos;i++) {
-			if (puestos[i].isDisponible()) return true;
+		boolean hayCupo = false;
+		for( int i = 0 ; i < this.cantidadParqueaderos ; i++ ) 
+		{
+			if (puestos[i].isDisponible()) 
+			{
+				hayCupo = true;
+			}
 		}
-		return false;
+		return hayCupo;
 	}
 	
 	public double retirarCarro(Carro carro) {
 		int puestoAsignado = carro.getPuesto();
-		
-		return 0;
+		puestos[puestoAsignado-1].setDisponible(true);
+		puestos[puestoAsignado-1].setOcupante(null);
+		int tiempoEnParqueadero = this.horaActual - (carro.getHoraEntrada() - 01);
+		return (tiempoEnParqueadero * this.tarifa);
 	}
 	
-	public int puestoOcupado(Carro carro) {
-		int puestoOcupado = 0;
-		for (int i=0; i<cantidadParqueaderos; i++)
-		{
-			if (puestos[i].getOcupante().equals(carro.getPlaca())){
-				puestoOcupado = i+1;				
-			}
-		}
-		return puestoOcupado;
-	}	
+	public void avanzarUnaHora() {
+		this.horaActual = this.horaActual + 1;
+	}
+
 }

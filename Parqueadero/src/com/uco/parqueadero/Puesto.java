@@ -5,11 +5,12 @@ public class Puesto {
 	private String ocupante;
 
 	public Puesto() {
-		// TODO Auto-generated constructor stub
+		this.disponible = true;
+		this.ocupante = null;
 	}
 	
 	public boolean isDisponible() {
-		return disponible;
+		return this.disponible;
 	}
 
 	public void setDisponible(boolean disponible) {

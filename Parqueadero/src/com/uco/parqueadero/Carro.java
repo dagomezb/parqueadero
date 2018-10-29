@@ -5,14 +5,16 @@ public class Carro {
 	private int horaEntrada;
 	private int puesto;
 	
-	public Carro(String placa, int horaEntrada) {
-		this.puesto = 0;
+	public Carro(String placa) {
+		
 		this.placa = placa;
-		this.horaEntrada = horaEntrada;
+		this.horaEntrada = 0;
+		this.puesto = 0;
+		
 	}
 	
 	public String getPlaca() {
-		return placa;
+		return this.placa;
 	}
 	public void setPlaca(String placa) {
 		this.placa = placa;
@@ -25,7 +27,7 @@ public class Carro {
 	}
 
 	public int getPuesto() {
-		return puesto;
+		return this.puesto;
 	}
 
 	public void setPuesto(int puesto) {
