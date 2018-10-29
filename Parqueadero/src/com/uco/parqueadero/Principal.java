@@ -4,22 +4,21 @@ public class Principal {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Parqueadero AeroPark = new Parqueadero(3500, 0, 40);
+		ParqueaderoCarro AeroPark = new ParqueaderoCarro(3500, 0, 40);
+		ParqueaderoMoto AeroMotoPark = new ParqueaderoMoto(1750, 0, 80);
 		
 		Carro carro2 = new Carro("MRC351");
+		Moto moto1 = new Moto("UCO61E");
 		
 		AeroPark.registrar(carro2);
-		
-		Carro carro3 = new Carro("MRC352");
-		
-		AeroPark.registrar(carro3);
-		
+		AeroMotoPark.registrar(moto1);
+				
 				
 		System.out.println(carro2.getPuesto());
-		System.out.println(carro3.getPuesto());
+		System.out.println(moto1.getPuesto());
 		
 		System.out.println(AeroPark.retirarCarro(carro2));
-		AeroPark.avanzarUnaHora();
-		System.out.println(AeroPark.retirarCarro(carro3));
+		
+		System.out.println(AeroMotoPark.retirarCarro(moto1));
 	}
 }
